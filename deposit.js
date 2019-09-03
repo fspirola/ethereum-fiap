@@ -1,9 +1,17 @@
 function deposit(address, value) {
 
-    eth.sendTransaction({from:eth.accounts[0],to:address,value:web3.toWei(value)});
-    
-    console.log(" Enviando: " + value + " para " + address);
+    var from = eth.accounts[0]
 
-    console.log(eth.getBalance(address));
+    var acctBal = web3.fromWei(eth.getBalance(from).toString(), "ether");
+
+    console.log("Saldo atual: " + acctBal);
+
+    console.log("Transferindo");
+
+    eth.sendTransaction({from:from,to:address,value:web3.toWei(value)});
+
+    console.log(" Enviado: " + value + " para " + address);
+
+    console.log("Novo Saldo: " + (web3.fromWei(eth.getBalance(from).toString(), "ether")));
     }
     
